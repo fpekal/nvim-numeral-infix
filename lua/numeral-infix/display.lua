@@ -29,4 +29,15 @@ function M.show_infixes_in_places(places)
   end
 end
 
+function M.show_colors_in_places(places)
+  if ns == nil then
+	return
+  end
+  vim.api.nvim_buf_clear_namespace(0, ns, 0, -1)
+
+  for _,place in ipairs(places) do
+	vim.api.nvim_buf_set_extmark(0, ns, place.y-1, place.x-1, {hl_group="NumeralInfix"..place.kind, hl_mode="combine", end_col=place.x})
+  end
+end
+
 return M
